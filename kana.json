@@ -1,0 +1,552 @@
+[
+  {
+    "id": "hiragana-vowels",
+    "label": "Hiragana · Vowels",
+    "characters": [
+      {"kana": "あ", "romaji": ["a"]},
+      {"kana": "い", "romaji": ["i"]},
+      {"kana": "う", "romaji": ["u"]},
+      {"kana": "え", "romaji": ["e"]},
+      {"kana": "お", "romaji": ["o"]}
+    ]
+  },
+  {
+    "id": "hiragana-k",
+    "label": "Hiragana · K row",
+    "characters": [
+      {"kana": "か", "romaji": ["ka"]},
+      {"kana": "き", "romaji": ["ki"]},
+      {"kana": "く", "romaji": ["ku"]},
+      {"kana": "け", "romaji": ["ke"]},
+      {"kana": "こ", "romaji": ["ko"]}
+    ]
+  },
+  {
+    "id": "hiragana-s",
+    "label": "Hiragana · S row",
+    "characters": [
+      {"kana": "さ", "romaji": ["sa"]},
+      {"kana": "し", "romaji": ["shi"]},
+      {"kana": "す", "romaji": ["su"]},
+      {"kana": "せ", "romaji": ["se"]},
+      {"kana": "そ", "romaji": ["so"]}
+    ]
+  },
+  {
+    "id": "hiragana-t",
+    "label": "Hiragana · T row",
+    "characters": [
+      {"kana": "た", "romaji": ["ta"]},
+      {"kana": "ち", "romaji": ["chi"]},
+      {"kana": "つ", "romaji": ["tsu"]},
+      {"kana": "て", "romaji": ["te"]},
+      {"kana": "と", "romaji": ["to"]}
+    ]
+  },
+  {
+    "id": "hiragana-n",
+    "label": "Hiragana · N row",
+    "characters": [
+      {"kana": "な", "romaji": ["na"]},
+      {"kana": "に", "romaji": ["ni"]},
+      {"kana": "ぬ", "romaji": ["nu"]},
+      {"kana": "ね", "romaji": ["ne"]},
+      {"kana": "の", "romaji": ["no"]}
+    ]
+  },
+  {
+    "id": "hiragana-h",
+    "label": "Hiragana · H row",
+    "characters": [
+      {"kana": "は", "romaji": ["ha"]},
+      {"kana": "ひ", "romaji": ["hi"]},
+      {"kana": "ふ", "romaji": ["fu"]},
+      {"kana": "へ", "romaji": ["he"]},
+      {"kana": "ほ", "romaji": ["ho"]}
+    ]
+  },
+  {
+    "id": "hiragana-m",
+    "label": "Hiragana · M row",
+    "characters": [
+      {"kana": "ま", "romaji": ["ma"]},
+      {"kana": "み", "romaji": ["mi"]},
+      {"kana": "む", "romaji": ["mu"]},
+      {"kana": "め", "romaji": ["me"]},
+      {"kana": "も", "romaji": ["mo"]}
+    ]
+  },
+  {
+    "id": "hiragana-y",
+    "label": "Hiragana · Y row",
+    "characters": [
+      {"kana": "や", "romaji": ["ya"]},
+      {"kana": "ゆ", "romaji": ["yu"]},
+      {"kana": "よ", "romaji": ["yo"]}
+    ]
+  },
+  {
+    "id": "hiragana-r",
+    "label": "Hiragana · R row",
+    "characters": [
+      {"kana": "ら", "romaji": ["ra"]},
+      {"kana": "り", "romaji": ["ri"]},
+      {"kana": "る", "romaji": ["ru"]},
+      {"kana": "れ", "romaji": ["re"]},
+      {"kana": "ろ", "romaji": ["ro"]}
+    ]
+  },
+  {
+    "id": "hiragana-w",
+    "label": "Hiragana · W row",
+    "characters": [
+      {"kana": "わ", "romaji": ["wa"]},
+      {"kana": "を", "romaji": ["o"]}
+    ]
+  },
+  {
+    "id": "hiragana-nn",
+    "label": "Hiragana · N sound",
+    "characters": [
+      {"kana": "ん", "romaji": ["n"]}
+    ]
+  },
+  {
+    "id": "hiragana-g",
+    "label": "Hiragana · G row",
+    "characters": [
+      {"kana": "が", "romaji": ["ga"]},
+      {"kana": "ぎ", "romaji": ["gi"]},
+      {"kana": "ぐ", "romaji": ["gu"]},
+      {"kana": "げ", "romaji": ["ge"]},
+      {"kana": "ご", "romaji": ["go"]}
+    ]
+  },
+  {
+    "id": "hiragana-z",
+    "label": "Hiragana · Z row",
+    "characters": [
+      {"kana": "ざ", "romaji": ["za"]},
+      {"kana": "じ", "romaji": ["ji"]},
+      {"kana": "ず", "romaji": ["zu"]},
+      {"kana": "ぜ", "romaji": ["ze"]},
+      {"kana": "ぞ", "romaji": ["zo"]}
+    ]
+  },
+  {
+    "id": "hiragana-d",
+    "label": "Hiragana · D row",
+    "characters": [
+      {"kana": "だ", "romaji": ["da"]},
+      {"kana": "ぢ", "romaji": ["ji"]},
+      {"kana": "づ", "romaji": ["zu"]},
+      {"kana": "で", "romaji": ["de"]},
+      {"kana": "ど", "romaji": ["do"]}
+    ]
+  },
+  {
+    "id": "hiragana-b",
+    "label": "Hiragana · B row",
+    "characters": [
+      {"kana": "ば", "romaji": ["ba"]},
+      {"kana": "び", "romaji": ["bi"]},
+      {"kana": "ぶ", "romaji": ["bu"]},
+      {"kana": "べ", "romaji": ["be"]},
+      {"kana": "ぼ", "romaji": ["bo"]}
+    ]
+  },
+  {
+    "id": "hiragana-p",
+    "label": "Hiragana · P row",
+    "characters": [
+      {"kana": "ぱ", "romaji": ["pa"]},
+      {"kana": "ぴ", "romaji": ["pi"]},
+      {"kana": "ぷ", "romaji": ["pu"]},
+      {"kana": "ぺ", "romaji": ["pe"]},
+      {"kana": "ぽ", "romaji": ["po"]}
+    ]
+  },
+  {
+    "id": "hiragana-combo-k",
+    "label": "Hiragana · KY combinations",
+    "characters": [
+      {"kana": "きゃ", "romaji": ["kya"]},
+      {"kana": "きゅ", "romaji": ["kyu"]},
+      {"kana": "きょ", "romaji": ["kyo"]}
+    ]
+  },
+  {
+    "id": "hiragana-combo-s",
+    "label": "Hiragana · SH combinations",
+    "characters": [
+      {"kana": "しゃ", "romaji": ["sha"]},
+      {"kana": "しゅ", "romaji": ["shu"]},
+      {"kana": "しょ", "romaji": ["sho"]}
+    ]
+  },
+  {
+    "id": "hiragana-combo-t",
+    "label": "Hiragana · CH combinations",
+    "characters": [
+      {"kana": "ちゃ", "romaji": ["cha"]},
+      {"kana": "ちゅ", "romaji": ["chu"]},
+      {"kana": "ちょ", "romaji": ["cho"]}
+    ]
+  },
+  {
+    "id": "hiragana-combo-n",
+    "label": "Hiragana · NY combinations",
+    "characters": [
+      {"kana": "にゃ", "romaji": ["nya"]},
+      {"kana": "にゅ", "romaji": ["nyu"]},
+      {"kana": "にょ", "romaji": ["nyo"]}
+    ]
+  },
+  {
+    "id": "hiragana-combo-h",
+    "label": "Hiragana · HY combinations",
+    "characters": [
+      {"kana": "ひゃ", "romaji": ["hya"]},
+      {"kana": "ひゅ", "romaji": ["hyu"]},
+      {"kana": "ひょ", "romaji": ["hyo"]}
+    ]
+  },
+  {
+    "id": "hiragana-combo-m",
+    "label": "Hiragana · MY combinations",
+    "characters": [
+      {"kana": "みゃ", "romaji": ["mya"]},
+      {"kana": "みゅ", "romaji": ["myu"]},
+      {"kana": "みょ", "romaji": ["myo"]}
+    ]
+  },
+  {
+    "id": "hiragana-combo-r",
+    "label": "Hiragana · RY combinations",
+    "characters": [
+      {"kana": "りゃ", "romaji": ["rya"]},
+      {"kana": "りゅ", "romaji": ["ryu"]},
+      {"kana": "りょ", "romaji": ["ryo"]}
+    ]
+  },
+  {
+    "id": "hiragana-combo-g",
+    "label": "Hiragana · GY combinations",
+    "characters": [
+      {"kana": "ぎゃ", "romaji": ["gya"]},
+      {"kana": "ぎゅ", "romaji": ["gyu"]},
+      {"kana": "ぎょ", "romaji": ["gyo"]}
+    ]
+  },
+  {
+    "id": "hiragana-combo-z",
+    "label": "Hiragana · J combinations",
+    "characters": [
+      {"kana": "じゃ", "romaji": ["ja"]},
+      {"kana": "じゅ", "romaji": ["ju"]},
+      {"kana": "じょ", "romaji": ["jo"]}
+    ]
+  },
+  {
+    "id": "hiragana-combo-d",
+    "label": "Hiragana · J combinations",
+    "characters": [
+      {"kana": "ぢゃ", "romaji": ["ja"]},
+      {"kana": "ぢゅ", "romaji": ["ju"]},
+      {"kana": "ぢょ", "romaji": ["jo"]}
+    ]
+  },
+  {
+    "id": "hiragana-combo-b",
+    "label": "Hiragana · BY combinations",
+    "characters": [
+      {"kana": "びゃ", "romaji": ["bya"]},
+      {"kana": "びゅ", "romaji": ["byu"]},
+      {"kana": "びょ", "romaji": ["byo"]}
+    ]
+  },
+  {
+    "id": "hiragana-combo-p",
+    "label": "Hiragana · PY combinations",
+    "characters": [
+      {"kana": "ぴゃ", "romaji": ["pya"]},
+      {"kana": "ぴゅ", "romaji": ["pyu"]},
+      {"kana": "ぴょ", "romaji": ["pyo"]}
+    ]
+  },
+  {
+    "id": "katakana-vowels",
+    "label": "Katakana · Vowels",
+    "characters": [
+      {"kana": "ア", "romaji": ["a"]},
+      {"kana": "イ", "romaji": ["i"]},
+      {"kana": "ウ", "romaji": ["u"]},
+      {"kana": "エ", "romaji": ["e"]},
+      {"kana": "オ", "romaji": ["o"]}
+    ]
+  },
+  {
+    "id": "katakana-k",
+    "label": "Katakana · K row",
+    "characters": [
+      {"kana": "カ", "romaji": ["ka"]},
+      {"kana": "キ", "romaji": ["ki"]},
+      {"kana": "ク", "romaji": ["ku"]},
+      {"kana": "ケ", "romaji": ["ke"]},
+      {"kana": "コ", "romaji": ["ko"]}
+    ]
+  },
+  {
+    "id": "katakana-s",
+    "label": "Katakana · S row",
+    "characters": [
+      {"kana": "サ", "romaji": ["sa"]},
+      {"kana": "シ", "romaji": ["shi"]},
+      {"kana": "ス", "romaji": ["su"]},
+      {"kana": "セ", "romaji": ["se"]},
+      {"kana": "ソ", "romaji": ["so"]}
+    ]
+  },
+  {
+    "id": "katakana-t",
+    "label": "Katakana · T row",
+    "characters": [
+      {"kana": "タ", "romaji": ["ta"]},
+      {"kana": "チ", "romaji": ["chi"]},
+      {"kana": "ツ", "romaji": ["tsu"]},
+      {"kana": "テ", "romaji": ["te"]},
+      {"kana": "ト", "romaji": ["to"]}
+    ]
+  },
+  {
+    "id": "katakana-n",
+    "label": "Katakana · N row",
+    "characters": [
+      {"kana": "ナ", "romaji": ["na"]},
+      {"kana": "ニ", "romaji": ["ni"]},
+      {"kana": "ヌ", "romaji": ["nu"]},
+      {"kana": "ネ", "romaji": ["ne"]},
+      {"kana": "ノ", "romaji": ["no"]}
+    ]
+  },
+  {
+    "id": "katakana-h",
+    "label": "Katakana · H row",
+    "characters": [
+      {"kana": "ハ", "romaji": ["ha"]},
+      {"kana": "ヒ", "romaji": ["hi"]},
+      {"kana": "フ", "romaji": ["fu"]},
+      {"kana": "ヘ", "romaji": ["he"]},
+      {"kana": "ホ", "romaji": ["ho"]}
+    ]
+  },
+  {
+    "id": "katakana-m",
+    "label": "Katakana · M row",
+    "characters": [
+      {"kana": "マ", "romaji": ["ma"]},
+      {"kana": "ミ", "romaji": ["mi"]},
+      {"kana": "ム", "romaji": ["mu"]},
+      {"kana": "メ", "romaji": ["me"]},
+      {"kana": "モ", "romaji": ["mo"]}
+    ]
+  },
+  {
+    "id": "katakana-y",
+    "label": "Katakana · Y row",
+    "characters": [
+      {"kana": "ヤ", "romaji": ["ya"]},
+      {"kana": "ユ", "romaji": ["yu"]},
+      {"kana": "ヨ", "romaji": ["yo"]}
+    ]
+  },
+  {
+    "id": "katakana-r",
+    "label": "Katakana · R row",
+    "characters": [
+      {"kana": "ラ", "romaji": ["ra"]},
+      {"kana": "リ", "romaji": ["ri"]},
+      {"kana": "ル", "romaji": ["ru"]},
+      {"kana": "レ", "romaji": ["re"]},
+      {"kana": "ロ", "romaji": ["ro"]}
+    ]
+  },
+  {
+    "id": "katakana-w",
+    "label": "Katakana · W row",
+    "characters": [
+      {"kana": "ワ", "romaji": ["wa"]},
+      {"kana": "ヲ", "romaji": ["o"]}
+    ]
+  },
+  {
+    "id": "katakana-nn",
+    "label": "Katakana · N sound",
+    "characters": [
+      {"kana": "ン", "romaji": ["n"]}
+    ]
+  },
+  {
+    "id": "katakana-g",
+    "label": "Katakana · G row",
+    "characters": [
+      {"kana": "ガ", "romaji": ["ga"]},
+      {"kana": "ギ", "romaji": ["gi"]},
+      {"kana": "グ", "romaji": ["gu"]},
+      {"kana": "ゲ", "romaji": ["ge"]},
+      {"kana": "ゴ", "romaji": ["go"]}
+    ]
+  },
+  {
+    "id": "katakana-z",
+    "label": "Katakana · Z row",
+    "characters": [
+      {"kana": "ザ", "romaji": ["za"]},
+      {"kana": "ジ", "romaji": ["ji"]},
+      {"kana": "ズ", "romaji": ["zu"]},
+      {"kana": "ゼ", "romaji": ["ze"]},
+      {"kana": "ゾ", "romaji": ["zo"]}
+    ]
+  },
+  {
+    "id": "katakana-d",
+    "label": "Katakana · D row",
+    "characters": [
+      {"kana": "ダ", "romaji": ["da"]},
+      {"kana": "ヂ", "romaji": ["ji"]},
+      {"kana": "ヅ", "romaji": ["zu"]},
+      {"kana": "デ", "romaji": ["de"]},
+      {"kana": "ド", "romaji": ["do"]}
+    ]
+  },
+  {
+    "id": "katakana-b",
+    "label": "Katakana · B row",
+    "characters": [
+      {"kana": "バ", "romaji": ["ba"]},
+      {"kana": "ビ", "romaji": ["bi"]},
+      {"kana": "ブ", "romaji": ["bu"]},
+      {"kana": "ベ", "romaji": ["be"]},
+      {"kana": "ボ", "romaji": ["bo"]}
+    ]
+  },
+  {
+    "id": "katakana-p",
+    "label": "Katakana · P row",
+    "characters": [
+      {"kana": "パ", "romaji": ["pa"]},
+      {"kana": "ピ", "romaji": ["pi"]},
+      {"kana": "プ", "romaji": ["pu"]},
+      {"kana": "ペ", "romaji": ["pe"]},
+      {"kana": "ポ", "romaji": ["po"]}
+    ]
+  },
+  {
+    "id": "katakana-combo-k",
+    "label": "Katakana · KY combinations",
+    "characters": [
+      {"kana": "キャ", "romaji": ["kya"]},
+      {"kana": "キュ", "romaji": ["kyu"]},
+      {"kana": "キョ", "romaji": ["kyo"]}
+    ]
+  },
+  {
+    "id": "katakana-combo-s",
+    "label": "Katakana · SH combinations",
+    "characters": [
+      {"kana": "シャ", "romaji": ["sha"]},
+      {"kana": "シュ", "romaji": ["shu"]},
+      {"kana": "ショ", "romaji": ["sho"]}
+    ]
+  },
+  {
+    "id": "katakana-combo-t",
+    "label": "Katakana · CH combinations",
+    "characters": [
+      {"kana": "チャ", "romaji": ["cha"]},
+      {"kana": "チュ", "romaji": ["chu"]},
+      {"kana": "チョ", "romaji": ["cho"]}
+    ]
+  },
+  {
+    "id": "katakana-combo-n",
+    "label": "Katakana · NY combinations",
+    "characters": [
+      {"kana": "ニャ", "romaji": ["nya"]},
+      {"kana": "ニュ", "romaji": ["nyu"]},
+      {"kana": "ニョ", "romaji": ["nyo"]}
+    ]
+  },
+  {
+    "id": "katakana-combo-h",
+    "label": "Katakana · HY combinations",
+    "characters": [
+      {"kana": "ヒャ", "romaji": ["hya"]},
+      {"kana": "ヒュ", "romaji": ["hyu"]},
+      {"kana": "ヒョ", "romaji": ["hyo"]}
+    ]
+  },
+  {
+    "id": "katakana-combo-m",
+    "label": "Katakana · MY combinations",
+    "characters": [
+      {"kana": "ミャ", "romaji": ["mya"]},
+      {"kana": "ミュ", "romaji": ["myu"]},
+      {"kana": "ミョ", "romaji": ["myo"]}
+    ]
+  },
+  {
+    "id": "katakana-combo-r",
+    "label": "Katakana · RY combinations",
+    "characters": [
+      {"kana": "リャ", "romaji": ["rya"]},
+      {"kana": "リュ", "romaji": ["ryu"]},
+      {"kana": "リョ", "romaji": ["ryo"]}
+    ]
+  },
+  {
+    "id": "katakana-combo-g",
+    "label": "Katakana · GY combinations",
+    "characters": [
+      {"kana": "ギャ", "romaji": ["gya"]},
+      {"kana": "ギュ", "romaji": ["gyu"]},
+      {"kana": "ギョ", "romaji": ["gyo"]}
+    ]
+  },
+  {
+    "id": "katakana-combo-z",
+    "label": "Katakana · J combinations",
+    "characters": [
+      {"kana": "ジャ", "romaji": ["ja"]},
+      {"kana": "ジュ", "romaji": ["ju"]},
+      {"kana": "ジョ", "romaji": ["jo"]}
+    ]
+  },
+  {
+    "id": "katakana-combo-d",
+    "label": "Katakana · J combinations",
+    "characters": [
+      {"kana": "ヂャ", "romaji": ["ja"]},
+      {"kana": "ヂュ", "romaji": ["ju"]},
+      {"kana": "ヂョ", "romaji": ["jo"]}
+    ]
+  },
+  {
+    "id": "katakana-combo-b",
+    "label": "Katakana · BY combinations",
+    "characters": [
+      {"kana": "ビャ", "romaji": ["bya"]},
+      {"kana": "ビュ", "romaji": ["byu"]},
+      {"kana": "ビョ", "romaji": ["byo"]}
+    ]
+  },
+  {
+    "id": "katakana-combo-p",
+    "label": "Katakana · PY combinations",
+    "characters": [
+      {"kana": "ピャ", "romaji": ["pya"]},
+      {"kana": "ピュ", "romaji": ["pyu"]},
+      {"kana": "ピョ", "romaji": ["pyo"]}
+    ]
+  }
+]

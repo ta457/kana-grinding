@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f5ee">
+    <meta name="description" content="A little practice goes a long way. Learn hiragana and katakana with a simple, mobile-friendly kana quiz.">
+    <title>Kana Grinding — One kana at a time</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%232c5143'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='44' fill='%23fff' font-family='sans-serif'%3Eあ%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-header">
+        <a class="brand" href="./" aria-label="Kana Grinding home"><span class="brand-mark" lang="ja">あ</span>Kana Grinding<span class="brand-dot">.</span></a>
+        <span class="header-note">A little practice goes a long way.</span>
+      </header>
+
+      <main>
+        <div class="intro">
+          <p class="eyebrow">YOUR NEXT SMALL STEP</p>
+          <h1>One kana at a time<span>.</span></h1>
+          <p>Build your recall. Find your rhythm.</p>
+        </div>
+
+        <div class="workspace">
+          <section class="practice card" aria-label="Kana practice" aria-busy="true" id="practice">
+            <fieldset class="mode-switch" id="mode-switch" disabled>
+              <legend class="sr-only">Practice mode</legend>
+              <label><input type="radio" name="mode" value="typing" checked><span>Type an answer</span></label>
+              <label><input type="radio" name="mode" value="choice"><span>Choose an answer</span></label>
+            </fieldset>
+
+            <div class="question">
+              <p class="question-group" id="question-group">LET’S GET STARTED</p>
+              <div class="kana" id="kana" lang="ja" aria-live="polite">あ</div>
+              <p class="question-help" id="question-help">Loading your kana…</p>
+            </div>
+
+            <form id="answer-form" hidden>
+              <label class="input-label" for="answer">Romaji</label>
+              <div class="answer-row">
+                <input id="answer" name="answer" type="text" placeholder="Type the sound…" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" inputmode="text" enterkeyhint="go" required aria-describedby="kana feedback">
+                <button class="button primary" id="check" type="submit">Check <span aria-hidden="true">↵</span></button>
+              </div>
+            </form>
+            <div id="choices" class="choices" role="group" aria-label="Answer choices" aria-describedby="kana" hidden></div>
+
+            <p id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+            <div class="practice-actions">
+              <button class="text-button" id="reveal" type="button" disabled>Reveal answer</button>
+              <button class="button next" id="next" type="button" disabled>Next kana <span aria-hidden="true">→</span></button>
+            </div>
+          </section>
+
+          <aside class="sidebar">
+            <details class="settings card" id="settings">
+              <summary><span><span class="eyebrow">MAKE IT YOURS</span><span class="settings-title">Practice set</span></span><span class="expand-icon" aria-hidden="true">+</span></summary>
+              <div class="settings-body">
+                <p class="settings-intro">Start small. Add a group when it feels familiar.</p>
+                <div class="selection-summary"><span id="selection-count">Loading groups…</span><button class="text-button" id="clear" type="button" disabled>Clear all</button></div>
+                <div id="groups"></div>
+              </div>
+            </details>
+            <p class="small-note"><span aria-hidden="true">✳</span> No timer. No pressure. Just practice.</p>
+          </aside>
+        </div>
+      </main>
+      <footer>HIRAGANA <span aria-hidden="true">·</span> KATAKANA <span aria-hidden="true">·</span> YOU’VE GOT THIS</footer>
+    </div>
+    <noscript><p class="noscript">Please enable JavaScript to practice kana.</p></noscript>
+  </body>
+</html>
