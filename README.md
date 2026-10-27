@@ -5,32 +5,6 @@ their romanization or pick from four answers, and reveal an answer when needed.
 Includes 214 kana across basic, voiced, and combination groups. Built with
 vanilla HTML, CSS, and JavaScript; no installation or build step.
 
-## Run locally
-
-Serve the project over HTTP so the browser can load the JSON data and modules:
-
-```sh
-python -m http.server 8000
-```
-
-Open http://localhost:8000. Opening `index.html` directly from disk will not work.
-
-## Checks
-
-With Node.js 24 or newer:
-
-```sh
-node --test quiz.test.mjs
-```
-
-## Publish on GitHub Pages
-
-Push the project to GitHub, then open the repository's **Settings → Pages**.
-Choose **Deploy from a branch**, your publishing branch, and **/ (root)**.
-No build workflow is necessary. Relative paths support the default project URL:
-`https://<username>.github.io/kana-grinding/`.
-See GitHub's [publishing-source instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
-
 ## Project files
 
 - `index.html`, `styles.css`: accessible, responsive interface.
