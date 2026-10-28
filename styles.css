@@ -233,6 +233,27 @@ h1 {
   text-transform: uppercase;
 }
 
+.question-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.combo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: var(--tint);
+  color: var(--green);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
 .kana {
   min-height: 174px;
   display: grid;

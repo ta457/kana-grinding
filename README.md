@@ -20,6 +20,11 @@ vanilla HTML, CSS, and JavaScript; no installation or build step.
   groups ends the pass while preserving the session's missed list. Changing
   answer mode keeps the current question and any mistake already made on it.
 - The missed list resets on reload; it is not saved with settings.
+- **Combo** counts consecutive first-try correct answers in either answer mode,
+  including review. Wrong answers, reveals, and practice-set changes reset it.
+  Retrying or re-answering the same question after switching modes cannot add
+  another point. Skipping and switching between normal practice and review do
+  not change the count. The combo resets on reload and is not saved.
 
 ## Checks
 

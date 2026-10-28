@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { questionPool, isCorrect, answerChoices, normalizeSettings, reviewPool } from './quiz.js';
+import { questionPool, isCorrect, answerChoices, normalizeSettings, reviewPool, nextCombo } from './quiz.js';
 
 const groups = JSON.parse(await readFile(new URL('./kana.json', import.meta.url), 'utf8'));
 
@@ -81,6 +81,20 @@ test('typed answers normalize configured spellings and reject removed alternativ
   assert.equal(isCorrect(pool.find(item => item.kana === 'し'), 'si'), false);
   assert.equal(isCorrect(pool.find(item => item.kana === 'を'), 'wo'), false);
   assert.equal(isCorrect(pool.find(item => item.kana === 'づ'), 'du'), false);
+});
+
+test('combo grows for fresh correct answers, ignores retries, and breaks on mistakes or reveals', () => {
+  let count = nextCombo(0, true, true);
+  assert.equal(count, 1);
+  count = nextCombo(count, true, true);
+  assert.equal(count, 2);
+  assert.equal(nextCombo(count, true, false), 2);
+  count = nextCombo(count, false, true);
+  assert.equal(count, 0);
+  assert.equal(nextCombo(count, true, false), 0);
+  count = nextCombo(count, true, true);
+  assert.equal(count, 1);
+  assert.equal(nextCombo(count, false, false), 0);
 });
 
 test('choices have exactly one accepted answer and three unique wrong answers for every kana', () => {

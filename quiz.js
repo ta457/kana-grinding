@@ -21,6 +21,11 @@ export function isCorrect(character, answer) {
   return character.romaji.includes(answer.trim().toLowerCase());
 }
 
+export function nextCombo(count, correct, eligible) {
+  if (!correct) return 0;
+  return eligible ? count + 1 : count;
+}
+
 export function shuffled(items) {
   const result = [...items];
   for (let index = result.length - 1; index > 0; index--) {

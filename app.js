@@ -1,4 +1,4 @@
-import { questionPool, isCorrect, answerChoices, normalizeSettings, reviewPool } from './quiz.js';
+import { questionPool, isCorrect, answerChoices, normalizeSettings, reviewPool, nextCombo } from './quiz.js';
 
 const $ = id => document.getElementById(id);
 const form = $('answer-form');
@@ -15,12 +15,19 @@ let mode = 'typing';
 let reviewQueue = null;
 let reviewTotal = 0;
 let questionMissed = false;
+let combo = 0;
+let comboAwarded = false;
 
 $('settings').open = window.matchMedia('(min-width: 761px)').matches;
 
 function feedback(message = '', tone = '') {
   $('feedback').textContent = message;
   $('feedback').dataset.tone = tone;
+}
+
+function setCombo(count) {
+  combo = count;
+  $('combo-count').textContent = count;
 }
 
 function saveSettings() {
@@ -146,6 +153,7 @@ function renderQuestion(focusAnswer = false) {
 
 function nextQuestion(focusAnswer = false) {
   questionMissed = false;
+  comboAwarded = false;
   if (reviewQueue !== null) {
     current = reviewQueue.shift() ?? null;
   } else {
@@ -158,7 +166,11 @@ function nextQuestion(focusAnswer = false) {
 
 function updateSelection() {
   reviewQueue = null;
-  pool = questionPool(groups, selected);
+  const nextPool = questionPool(groups, selected);
+  if (nextPool.length !== pool.length || nextPool.some((character, index) => character.kana !== pool[index].kana)) {
+    setCombo(0);
+  }
+  pool = nextPool;
   $('selection-count').textContent = `${pool.length} kana · ${selected.size} ${selected.size === 1 ? 'group' : 'groups'}`;
   $('clear').disabled = selected.size === 0;
   saveSettings();
@@ -170,6 +182,8 @@ function updateSelection() {
 }
 
 function finish(revealed) {
+  setCombo(nextCombo(combo, !revealed, !questionMissed && !comboAwarded));
+  comboAwarded = true;
   if (revealed) {
     missed.add(current.kana);
     questionMissed = true;
@@ -195,6 +209,7 @@ function submitAnswer(value, button) {
   if (isCorrect(current, value)) {
     finish(false);
   } else {
+    setCombo(0);
     missed.add(current.kana);
     questionMissed = true;
     updateReviewControls();
