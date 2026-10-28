@@ -32,6 +32,14 @@
               <label><input type="radio" name="mode" value="choice"><span>Choose an answer</span></label>
             </fieldset>
 
+            <div class="review-bar" id="review-bar" hidden>
+              <span id="review-status" role="status"></span>
+              <div class="review-buttons">
+                <button class="text-button" id="review" type="button">Review missed</button>
+                <button class="text-button" id="back" type="button" hidden>Back to practice</button>
+              </div>
+            </div>
+
             <div class="question">
               <p class="question-group" id="question-group">LET’S GET STARTED</p>
               <div class="kana" id="kana" lang="ja" aria-live="polite">あ</div>
@@ -59,6 +67,7 @@
               <summary><span><span class="eyebrow">MAKE IT YOURS</span><span class="settings-title">Practice set</span></span><span class="expand-icon" aria-hidden="true">+</span></summary>
               <div class="settings-body">
                 <p class="settings-intro">Start small. Add a group when it feels familiar.</p>
+                <p class="storage-note" id="storage-note" role="status" hidden>Settings can’t be saved in this browser and will reset on reload.</p>
                 <div class="selection-summary"><span id="selection-count">Loading groups…</span><button class="text-button" id="clear" type="button" disabled>Clear all</button></div>
                 <div id="groups"></div>
               </div>

@@ -205,6 +205,26 @@ h1 {
   padding: 30px 0 23px;
 }
 
+.review-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 12px;
+  margin-top: 12px;
+  padding: 0 12px;
+  border-radius: 10px;
+  background: var(--tint);
+  color: var(--green);
+  font-size: 12px;
+}
+
+.review-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 14px;
+}
+
 .question-group {
   margin: 0;
   color: var(--muted);
@@ -420,6 +440,12 @@ h1 {
   color: var(--muted);
 }
 
+.storage-note {
+  color: #a1402b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 .selection-summary {
   display: flex;
   justify-content: space-between;
@@ -487,8 +513,16 @@ h1 {
   font-size: 16px;
 }
 
+.group-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
 .combination-heading {
-  margin: 15px 0 0;
+  flex: 1;
+  margin: 0;
   font-size: 11px;
   color: var(--muted);
   font-weight: 500;

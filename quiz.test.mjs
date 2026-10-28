@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { questionPool, isCorrect, answerChoices } from './quiz.js';
+import { questionPool, isCorrect, answerChoices, normalizeSettings, reviewPool } from './quiz.js';
 
 const groups = JSON.parse(await readFile(new URL('./kana.json', import.meta.url), 'utf8'));
 
@@ -43,6 +43,32 @@ test('pool contains only selected groups, including empty and single-kana select
   assert.equal(pool.length, 8);
   assert.ok(pool.every(item => ['hiragana-vowels', 'katakana-combo-k'].includes(item.groupId)));
   assert.equal(questionPool(groups, new Set(['hiragana-nn']))[0].kana, 'ん');
+});
+
+test('saved settings preserve empty selections and validate group IDs and mode', () => {
+  const defaults = { groups: ['hiragana-vowels'], mode: 'typing' };
+  for (const settings of [null, false, 'invalid', [], { groups: 'invalid', mode: 'unknown' }]) {
+    assert.deepEqual(normalizeSettings(settings, groups), defaults);
+  }
+  assert.deepEqual(normalizeSettings({ groups: [], mode: 'choice' }, groups), { groups: [], mode: 'choice' });
+  assert.deepEqual(normalizeSettings({
+    groups: ['katakana-nn', 'deleted-group', 'katakana-nn', null, 7, {}], mode: 'choice',
+  }, groups), { groups: ['katakana-nn'], mode: 'choice' });
+});
+
+test('review pass snapshots unique missed kana from selected groups only', () => {
+  const pool = questionPool(groups, new Set(['hiragana-vowels', 'katakana-nn']));
+  const missed = new Set(['あ', 'あ', 'ン', 'し']);
+  const review = reviewPool(pool, missed);
+  assert.deepEqual(review.map(character => character.kana).sort(), ['あ', 'ン'].sort());
+  assert.equal(review.length, 2);
+  missed.add('い');
+  missed.delete('あ');
+  assert.equal(review.length, 2);
+  review.shift();
+  assert.equal(pool.length, 6);
+  assert.deepEqual(reviewPool(pool, new Set()), []);
+  assert.deepEqual(reviewPool([], missed), []);
 });
 
 test('typed answers normalize configured spellings and reject removed alternatives', () => {

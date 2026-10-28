@@ -1,21 +1,35 @@
-import { questionPool, isCorrect, answerChoices } from './quiz.js';
+import { questionPool, isCorrect, answerChoices, normalizeSettings, reviewPool } from './quiz.js';
 
 const $ = id => document.getElementById(id);
 const form = $('answer-form');
 const answer = $('answer');
 const choices = $('choices');
 const selected = new Set(['hiragana-vowels']);
+const missed = new Set();
+const settingsKey = 'kana-grinding-settings';
 let groups = [];
 let pool = [];
 let current = null;
 let solved = false;
 let mode = 'typing';
+let reviewQueue = null;
+let reviewTotal = 0;
+let questionMissed = false;
 
 $('settings').open = window.matchMedia('(min-width: 761px)').matches;
 
 function feedback(message = '', tone = '') {
   $('feedback').textContent = message;
   $('feedback').dataset.tone = tone;
+}
+
+function saveSettings() {
+  try {
+    localStorage.setItem(settingsKey, JSON.stringify({ groups: [...selected], mode }));
+    $('storage-note').hidden = true;
+  } catch {
+    $('storage-note').hidden = false;
+  }
 }
 
 function buildGroups() {
@@ -26,12 +40,30 @@ function buildGroups() {
     legend.textContent = script === 'hiragana' ? 'Hiragana' : 'Katakana';
     fieldset.append(legend);
     for (const combinations of [false, true]) {
-      if (combinations) {
-        const heading = document.createElement('h3');
-        heading.className = 'combination-heading';
-        heading.textContent = 'Combinations';
-        fieldset.append(heading);
+      const section = document.createElement('div');
+      const header = document.createElement('div');
+      header.className = 'group-header';
+      const heading = document.createElement('h3');
+      heading.className = 'combination-heading';
+      heading.textContent = combinations ? 'Combinations' : 'Basic & voiced';
+      header.append(heading);
+      for (const selectAll of [true, false]) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'text-button';
+        button.textContent = selectAll ? 'Select all' : 'Clear';
+        button.setAttribute('aria-label', `${button.textContent} ${script} ${combinations ? 'combinations' : 'basic and voiced groups'}`);
+        button.addEventListener('click', () => {
+          for (const input of section.querySelectorAll('input')) {
+            input.checked = selectAll;
+            if (selectAll) selected.add(input.value);
+            else selected.delete(input.value);
+          }
+          updateSelection();
+        });
+        header.append(button);
       }
+      section.append(header);
       const grid = document.createElement('div');
       grid.className = 'group-grid';
       for (const group of groups.filter(item => item.id.startsWith(`${script}-`) && item.id.includes('-combo-') === combinations)) {
@@ -51,13 +83,26 @@ function buildGroups() {
         label.append(input, kana, name);
         grid.append(label);
       }
-      fieldset.append(grid);
+      section.append(grid);
+      fieldset.append(section);
     }
     $('groups').append(fieldset);
   }
 }
 
-function renderQuestion(focusInput = false) {
+function updateReviewControls() {
+  const count = pool.filter(character => missed.has(character.kana)).length;
+  const reviewing = reviewQueue !== null;
+  $('review-bar').hidden = !reviewing && count === 0;
+  $('review').hidden = (reviewing && current !== null) || count === 0;
+  $('review').textContent = `${reviewing ? 'Review remaining' : 'Review missed'} (${count})`;
+  $('back').hidden = !reviewing;
+  $('review-status').textContent = reviewing
+    ? (current ? `Review · ${reviewTotal - reviewQueue.length} of ${reviewTotal}` : `Pass complete · ${count} remaining`)
+    : `${count} kana to revisit`;
+}
+
+function renderQuestion(focusAnswer = false) {
   solved = false;
   answer.value = '';
   form.noValidate = false;
@@ -74,6 +119,14 @@ function renderQuestion(focusInput = false) {
   $('question-help').textContent = current
     ? (mode === 'typing' ? 'What sound does this kana make?' : 'Choose the matching romaji.')
     : 'Select a group in Practice set to begin.';
+  updateReviewControls();
+  if (!current && reviewQueue !== null) {
+    $('question-group').textContent = 'REVIEW COMPLETE';
+    $('kana').textContent = '✓';
+    $('question-help').textContent = 'Review any remaining kana, or go back to practice.';
+    feedback('Review pass complete.');
+    $('back').focus({ preventScroll: true });
+  }
   if (!current) return;
   if (mode === 'choice') {
     for (const text of answerChoices(current, pool, groups)) {
@@ -84,23 +137,31 @@ function renderQuestion(focusInput = false) {
       button.addEventListener('click', () => submitAnswer(text, button));
       choices.append(button);
     }
-  } else if (focusInput) {
+    if (focusAnswer) choices.firstElementChild?.focus({ preventScroll: true });
+  } else if (focusAnswer) {
     answer.focus({ preventScroll: true });
     answer.scrollIntoView({ block: 'nearest', behavior: 'instant' });
   }
 }
 
-function nextQuestion(focusInput = false) {
-  const alternatives = pool.filter(item => item.kana !== current?.kana);
-  const available = alternatives.length ? alternatives : pool;
-  current = available[Math.floor(Math.random() * available.length)] ?? null;
-  renderQuestion(focusInput);
+function nextQuestion(focusAnswer = false) {
+  questionMissed = false;
+  if (reviewQueue !== null) {
+    current = reviewQueue.shift() ?? null;
+  } else {
+    const alternatives = pool.filter(item => item.kana !== current?.kana);
+    const available = alternatives.length ? alternatives : pool;
+    current = available[Math.floor(Math.random() * available.length)] ?? null;
+  }
+  renderQuestion(focusAnswer);
 }
 
 function updateSelection() {
+  reviewQueue = null;
   pool = questionPool(groups, selected);
   $('selection-count').textContent = `${pool.length} kana · ${selected.size} ${selected.size === 1 ? 'group' : 'groups'}`;
   $('clear').disabled = selected.size === 0;
+  saveSettings();
   nextQuestion();
   if (!current) {
     $('settings').open = true;
@@ -109,6 +170,12 @@ function updateSelection() {
 }
 
 function finish(revealed) {
+  if (revealed) {
+    missed.add(current.kana);
+    questionMissed = true;
+  } else if (reviewQueue !== null && !questionMissed) {
+    missed.delete(current.kana);
+  }
   solved = true;
   form.noValidate = true;
   answer.removeAttribute('aria-invalid');
@@ -119,6 +186,7 @@ function finish(revealed) {
     if (button.textContent === current.romaji[0]) button.dataset.result = 'correct';
   }
   feedback(revealed ? `Answer: ${current.romaji.join(' / ')}. Take a look, then try the next one.` : `That’s right — ${current.romaji[0]}!`, revealed ? '' : 'correct');
+  updateReviewControls();
   if (mode === 'choice') $('next').focus({ preventScroll: true });
 }
 
@@ -127,6 +195,9 @@ function submitAnswer(value, button) {
   if (isCorrect(current, value)) {
     finish(false);
   } else {
+    missed.add(current.kana);
+    questionMissed = true;
+    updateReviewControls();
     feedback('Not quite. Try again, or reveal the answer.', 'wrong');
     if (button) {
       button.dataset.result = 'wrong';
@@ -144,11 +215,21 @@ form.addEventListener('submit', event => {
   if (solved) nextQuestion(true);
   else submitAnswer(answer.value);
 });
-$('next').addEventListener('click', () => nextQuestion(mode === 'typing'));
+$('next').addEventListener('click', () => nextQuestion(true));
 $('reveal').addEventListener('click', () => { if (current && !solved) finish(true); });
 $('mode-switch').addEventListener('change', event => {
   mode = event.target.value;
+  saveSettings();
   renderQuestion();
+});
+$('review').addEventListener('click', () => {
+  reviewQueue = reviewPool(pool, missed);
+  reviewTotal = reviewQueue.length;
+  nextQuestion(true);
+});
+$('back').addEventListener('click', () => {
+  reviewQueue = null;
+  nextQuestion(true);
 });
 $('groups').addEventListener('change', event => {
   const input = event.target;
@@ -174,6 +255,17 @@ async function start() {
         !character.romaji.length || character.romaji.some(text => typeof text !== 'string' || !/^[a-z]+$/.test(text))))) {
       throw new Error('Invalid kana data.');
     }
+    let saved = null;
+    try {
+      saved = JSON.parse(localStorage.getItem(settingsKey));
+    } catch {
+      // Unavailable storage or malformed settings must not prevent practice.
+    }
+    const settings = normalizeSettings(saved, groups);
+    selected.clear();
+    for (const id of settings.groups) selected.add(id);
+    mode = settings.mode;
+    document.querySelector(`input[name="mode"][value="${mode}"]`).checked = true;
     buildGroups();
     updateSelection();
     $('mode-switch').disabled = false;

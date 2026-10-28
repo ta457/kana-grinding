@@ -4,6 +4,19 @@ export function questionPool(groups, selected) {
   );
 }
 
+export function normalizeSettings(settings, groups) {
+  const known = new Set(groups.map(group => group.id));
+  const selected = Array.isArray(settings?.groups) ? settings.groups : ['hiragana-vowels'];
+  return {
+    groups: [...new Set(selected.filter(id => known.has(id)))],
+    mode: settings?.mode === 'choice' ? 'choice' : 'typing',
+  };
+}
+
+export function reviewPool(pool, missed) {
+  return shuffled(pool.filter(character => missed.has(character.kana)));
+}
+
 export function isCorrect(character, answer) {
   return character.romaji.includes(answer.trim().toLowerCase());
 }
