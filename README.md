@@ -7,10 +7,17 @@ vanilla HTML, CSS, and JavaScript; no installation or build step.
 
 ## Practice settings and review
 
-- Selected groups and practice mode are remembered in this browser using
+- Selected groups, pins, and practice mode are remembered in this browser using
   `localStorage`. Practice still works if browser storage is unavailable.
 - Each script has **Select all** and **Clear** controls for its basic/voiced
   groups and its combinations. The global **Clear all** removes every selection.
+  Every group shows all of its kana, each with its romaji directly underneath.
+- Pin any group to move it into **Pinned**, above Hiragana. Unpinning returns
+  it to its original section. Pins do not change selections, combo, or review;
+  script-level bulk controls still include pinned groups, and Clear all leaves
+  pins in place.
+- The collapsible **How to practice** note explains selection, answer modes,
+  combos, and missed-kana review.
 - Wrong answers and reveals add a kana to the session's missed list once.
   Correcting an answer during normal practice does not remove it.
 - **Review missed** starts one pass through missed kana in the selected groups.

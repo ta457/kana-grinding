@@ -5,6 +5,7 @@ const form = $('answer-form');
 const answer = $('answer');
 const choices = $('choices');
 const selected = new Set(['hiragana-vowels']);
+const pinned = new Set();
 const missed = new Set();
 const settingsKey = 'kana-grinding-settings';
 let groups = [];
@@ -32,7 +33,7 @@ function setCombo(count) {
 
 function saveSettings() {
   try {
-    localStorage.setItem(settingsKey, JSON.stringify({ groups: [...selected], mode }));
+    localStorage.setItem(settingsKey, JSON.stringify({ groups: [...selected], pinned: [...pinned], mode }));
     $('storage-note').hidden = true;
   } catch {
     $('storage-note').hidden = false;
@@ -40,6 +41,18 @@ function saveSettings() {
 }
 
 function buildGroups() {
+  $('groups').replaceChildren();
+  const pinnedSection = document.createElement('fieldset');
+  pinnedSection.className = 'script-groups';
+  pinnedSection.id = 'pinned-section';
+  pinnedSection.hidden = pinned.size === 0;
+  const pinnedLegend = document.createElement('legend');
+  pinnedLegend.textContent = 'Pinned';
+  const pinnedGrid = document.createElement('div');
+  pinnedGrid.className = 'group-grid';
+  pinnedGrid.id = 'pinned-groups';
+  pinnedSection.append(pinnedLegend, pinnedGrid);
+  $('groups').append(pinnedSection);
   for (const script of ['hiragana', 'katakana']) {
     const fieldset = document.createElement('fieldset');
     fieldset.className = 'script-groups';
@@ -47,6 +60,7 @@ function buildGroups() {
     legend.textContent = script === 'hiragana' ? 'Hiragana' : 'Katakana';
     fieldset.append(legend);
     for (const combinations of [false, true]) {
+      const sectionGroups = groups.filter(item => item.id.startsWith(`${script}-`) && item.id.includes('-combo-') === combinations);
       const section = document.createElement('div');
       const header = document.createElement('div');
       header.className = 'group-header';
@@ -61,10 +75,10 @@ function buildGroups() {
         button.textContent = selectAll ? 'Select all' : 'Clear';
         button.setAttribute('aria-label', `${button.textContent} ${script} ${combinations ? 'combinations' : 'basic and voiced groups'}`);
         button.addEventListener('click', () => {
-          for (const input of section.querySelectorAll('input')) {
-            input.checked = selectAll;
-            if (selectAll) selected.add(input.value);
-            else selected.delete(input.value);
+          for (const group of sectionGroups) {
+            $(`group-${group.id}`).checked = selectAll;
+            if (selectAll) selected.add(group.id);
+            else selected.delete(group.id);
           }
           updateSelection();
         });
@@ -73,22 +87,49 @@ function buildGroups() {
       section.append(header);
       const grid = document.createElement('div');
       grid.className = 'group-grid';
-      for (const group of groups.filter(item => item.id.startsWith(`${script}-`) && item.id.includes('-combo-') === combinations)) {
+      for (const group of sectionGroups) {
+        const card = document.createElement('div');
+        card.className = 'group-option';
         const label = document.createElement('label');
-        label.className = 'group-option';
+        label.className = 'group-select';
         const input = document.createElement('input');
         input.type = 'checkbox';
+        input.id = `group-${group.id}`;
         input.value = group.id;
         input.checked = selected.has(group.id);
-        input.setAttribute('aria-label', `${group.label}: ${group.characters.map(item => item.kana).join(' ')}`);
-        const kana = document.createElement('span');
-        kana.className = 'group-kana';
-        kana.lang = 'ja';
-        kana.textContent = group.characters[0].kana;
-        const name = document.createElement('span');
-        name.textContent = group.characters[0].romaji[0];
-        label.append(input, kana, name);
-        grid.append(label);
+        input.setAttribute('aria-label', `${group.label}: ${group.characters.map(item => `${item.kana} ${item.romaji[0]}`).join(', ')}`);
+        const characters = document.createElement('span');
+        characters.className = 'group-characters';
+        for (const character of group.characters) {
+          const kana = document.createElement('ruby');
+          kana.className = 'group-kana';
+          kana.lang = 'ja';
+          kana.textContent = character.kana;
+          const romaji = document.createElement('rt');
+          romaji.lang = 'en';
+          romaji.textContent = character.romaji[0];
+          kana.append(romaji);
+          characters.append(kana);
+        }
+        label.append(input, characters);
+        const pin = document.createElement('button');
+        pin.type = 'button';
+        pin.className = 'group-pin';
+        pin.id = `pin-${group.id}`;
+        pin.setAttribute('aria-pressed', String(pinned.has(group.id)));
+        pin.setAttribute('aria-label', pinned.has(group.id) ? `Unpin ${group.label}` : `Pin ${group.label} to top`);
+        pin.title = pin.getAttribute('aria-label');
+        pin.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6l-1 7 4 4v2H6v-2l4-4-1-7ZM12 16v5"/></svg>';
+        pin.addEventListener('click', () => {
+          if (pinned.has(group.id)) pinned.delete(group.id);
+          else pinned.add(group.id);
+          buildGroups();
+          saveSettings();
+          $(`pin-${group.id}`).focus({ preventScroll: true });
+          $(`pin-${group.id}`).scrollIntoView({ block: 'nearest', behavior: 'instant' });
+        });
+        card.append(label, pin);
+        (pinned.has(group.id) ? pinnedGrid : grid).append(card);
       }
       section.append(grid);
       fieldset.append(section);
@@ -279,6 +320,7 @@ async function start() {
     const settings = normalizeSettings(saved, groups);
     selected.clear();
     for (const id of settings.groups) selected.add(id);
+    for (const id of settings.pinned) pinned.add(id);
     mode = settings.mode;
     document.querySelector(`input[name="mode"][value="${mode}"]`).checked = true;
     buildGroups();

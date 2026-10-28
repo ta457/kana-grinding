@@ -7,8 +7,10 @@ export function questionPool(groups, selected) {
 export function normalizeSettings(settings, groups) {
   const known = new Set(groups.map(group => group.id));
   const selected = Array.isArray(settings?.groups) ? settings.groups : ['hiragana-vowels'];
+  const pinned = Array.isArray(settings?.pinned) ? settings.pinned : [];
   return {
     groups: [...new Set(selected.filter(id => known.has(id)))],
+    pinned: [...new Set(pinned.filter(id => known.has(id)))],
     mode: settings?.mode === 'choice' ? 'choice' : 'typing',
   };
 }

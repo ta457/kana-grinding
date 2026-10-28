@@ -500,16 +500,58 @@ h1 {
 .group-option {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
+  align-items: stretch;
+  width: 100%;
   min-height: 44px;
-  padding: 7px 10px;
   border: 1px solid var(--line);
   border-radius: 9px;
   color: #687168;
-  cursor: pointer;
   font-size: 12px;
+}
+
+.group-select {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.group-pin {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  align-self: center;
+  width: 44px;
+  min-height: 44px;
+  margin-right: 3px;
+  padding: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+}
+
+.group-pin:hover,
+.group-pin[aria-pressed="true"] {
+  background: var(--tint);
+  color: var(--green);
+}
+
+.group-pin svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.group-pin[aria-pressed="true"] svg {
+  fill: currentColor;
 }
 
 .group-option:has(input:checked) {
@@ -524,14 +566,59 @@ h1 {
 }
 
 .group-option input {
+  flex-shrink: 0;
   width: 13px;
   height: 13px;
   margin: 0 2px 0 0;
   accent-color: var(--green);
 }
 
-.group-option .group-kana {
-  font-size: 16px;
+.group-characters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  min-width: 0;
+}
+
+.group-kana {
+  ruby-position: under;
+  font-size: 18px;
+}
+
+.group-kana rt {
+  font-size: 11px;
+}
+
+.how-to {
+  margin-top: 16px;
+  padding: 12px 22px;
+}
+
+.how-to summary {
+  min-height: 44px;
+  align-content: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.how-to ol {
+  margin: 12px 0;
+  padding-left: 18px;
+}
+
+.how-to li,
+.how-to > p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.how-to li + li {
+  margin-top: 12px;
+}
+
+.how-to strong {
+  color: var(--ink);
 }
 
 .group-header {
