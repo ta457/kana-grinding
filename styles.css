@@ -70,7 +70,6 @@ button:disabled {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  border-bottom: 1px solid var(--line);
 }
 
 .brand {
