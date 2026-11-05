@@ -33,7 +33,7 @@ function setCombo(count) {
 
 function saveSettings() {
   try {
-    localStorage.setItem(settingsKey, JSON.stringify({ groups: [...selected], pinned: [...pinned], mode }));
+    localStorage.setItem(settingsKey, JSON.stringify({ groups: [...selected], pinned: [...pinned], mode, autoNext: $('auto-next').checked }));
     $('storage-note').hidden = true;
   } catch {
     $('storage-note').hidden = false;
@@ -242,7 +242,12 @@ function finish(revealed) {
   }
   feedback(revealed ? `Answer: ${current.romaji.join(' / ')}. Take a look, then try the next one.` : `That’s right — ${current.romaji[0]}!`, revealed ? '' : 'correct');
   updateReviewControls();
-  if (mode === 'choice') $('next').focus({ preventScroll: true });
+  if (!revealed && $('auto-next').checked) {
+    nextQuestion(true);
+    if (current) feedback('That’s right! Next kana ready.', 'correct');
+  } else if (mode === 'choice') {
+    $('next').focus({ preventScroll: true });
+  }
 }
 
 function submitAnswer(value, button) {
@@ -272,6 +277,7 @@ form.addEventListener('submit', event => {
   else submitAnswer(answer.value);
 });
 $('next').addEventListener('click', () => nextQuestion(true));
+$('auto-next').addEventListener('change', saveSettings);
 $('reveal').addEventListener('click', () => { if (current && !solved) finish(true); });
 $('mode-switch').addEventListener('change', event => {
   mode = event.target.value;
@@ -322,10 +328,12 @@ async function start() {
     for (const id of settings.groups) selected.add(id);
     for (const id of settings.pinned) pinned.add(id);
     mode = settings.mode;
+    $('auto-next').checked = settings.autoNext;
     document.querySelector(`input[name="mode"][value="${mode}"]`).checked = true;
     buildGroups();
     updateSelection();
     $('mode-switch').disabled = false;
+    $('auto-next').disabled = false;
   } catch (error) {
     current = null;
     renderQuestion();

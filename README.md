@@ -9,6 +9,9 @@ vanilla HTML, CSS, and JavaScript; no installation or build step.
 
 - Selected groups, pins, and practice mode are remembered in this browser using
   `localStorage`. Practice still works if browser storage is unavailable.
+- **Auto-next on correct** immediately advances after a correct submission in
+  either answer mode, including review. It starts off and is saved with settings.
+  Wrong answers and reveals stay on the current question for retry or manual next.
 - Each script has **Select all** and **Clear** controls for its basic/voiced
   groups and its combinations. The global **Clear all** removes every selection.
   Every group shows all of its kana, each with its romaji directly underneath.

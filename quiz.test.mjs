@@ -46,26 +46,33 @@ test('pool contains only selected groups, including empty and single-kana select
 });
 
 test('saved settings preserve empty selections and validate group IDs and mode', () => {
-  const defaults = { groups: ['hiragana-vowels'], pinned: [], mode: 'typing' };
+  const defaults = { groups: ['hiragana-vowels'], pinned: [], mode: 'typing', autoNext: false };
   for (const settings of [null, false, 'invalid', [], { groups: 'invalid', mode: 'unknown' }]) {
     assert.deepEqual(normalizeSettings(settings, groups), defaults);
   }
-  assert.deepEqual(normalizeSettings({ groups: [], mode: 'choice' }, groups), { groups: [], pinned: [], mode: 'choice' });
+  assert.deepEqual(normalizeSettings({ groups: [], mode: 'choice' }, groups), { groups: [], pinned: [], mode: 'choice', autoNext: false });
   assert.deepEqual(normalizeSettings({
     groups: ['katakana-nn', 'deleted-group', 'katakana-nn', null, 7, {}], mode: 'choice',
-  }, groups), { groups: ['katakana-nn'], pinned: [], mode: 'choice' });
+  }, groups), { groups: ['katakana-nn'], pinned: [], mode: 'choice', autoNext: false });
 });
 
 test('pinned settings accept known group IDs once and preserve older saved preferences', () => {
   assert.deepEqual(normalizeSettings({ groups: ['katakana-nn'], mode: 'choice' }, groups), {
-    groups: ['katakana-nn'], pinned: [], mode: 'choice',
+    groups: ['katakana-nn'], pinned: [], mode: 'choice', autoNext: false,
   });
   assert.deepEqual(normalizeSettings({ groups: [], pinned: ['katakana-nn', 'unknown', null, 4, {}, 'katakana-nn'] }, groups), {
-    groups: [], pinned: ['katakana-nn'], mode: 'typing',
+    groups: [], pinned: ['katakana-nn'], mode: 'typing', autoNext: false,
   });
   assert.deepEqual(normalizeSettings({ pinned: 'invalid' }, groups), {
-    groups: ['hiragana-vowels'], pinned: [], mode: 'typing',
+    groups: ['hiragana-vowels'], pinned: [], mode: 'typing', autoNext: false,
   });
+});
+
+test('auto-next defaults off and accepts only a saved boolean true', () => {
+  assert.equal(normalizeSettings({ autoNext: true }, groups).autoNext, true);
+  for (const autoNext of [undefined, false, null, 'true', 'false', 1, [], {}]) {
+    assert.equal(normalizeSettings({ autoNext }, groups).autoNext, false);
+  }
 });
 
 test('review pass snapshots unique missed kana from selected groups only', () => {

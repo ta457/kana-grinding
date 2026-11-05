@@ -200,6 +200,24 @@ h1 {
   outline-offset: 2px;
 }
 
+.auto-next-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.auto-next-option input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--green);
+}
+
 .question {
   text-align: center;
   padding: 30px 0 23px;

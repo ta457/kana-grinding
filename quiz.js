@@ -12,6 +12,7 @@ export function normalizeSettings(settings, groups) {
     groups: [...new Set(selected.filter(id => known.has(id)))],
     pinned: [...new Set(pinned.filter(id => known.has(id)))],
     mode: settings?.mode === 'choice' ? 'choice' : 'typing',
+    autoNext: settings?.autoNext === true,
   };
 }
 
