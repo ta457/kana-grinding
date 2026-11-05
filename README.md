@@ -36,10 +36,10 @@ vanilla HTML, CSS, and JavaScript; no installation or build step.
   another point. Skipping and switching between normal practice and review do
   not change the count. The combo resets on reload and is not saved.
 
-## Checks
+## Run locally
 
-Run `node --test quiz.test.mjs` with Node.js 24 or newer. Serve the project
-over HTTP, for example with `python -m http.server 8000`, to test in a browser.
+Serve the project over HTTP, for example with `python -m http.server 8000`,
+then open http://localhost:8000 in a browser.
 
 ## Project files
 
@@ -47,7 +47,6 @@ over HTTP, for example with `python -m http.server 8000`, to test in a browser.
 - `app.js`: page state and interactions; loads `kana.json` once.
 - `quiz.js`: shared question filtering, answer matching, and choice generation.
 - `kana.json`: selectable groups; each entry lists its kana and accepted romaji.
-- `quiz.test.mjs`: data and quiz logic checks using Node's built-in test runner.
 - `AGENT.md`: agreed scope and implementation guidance.
 
 The first romaji spelling is displayed; typing accepts only spellings listed

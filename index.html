@@ -32,8 +32,6 @@
               <label><input type="radio" name="mode" value="choice"><span>Choose an answer</span></label>
             </fieldset>
 
-            <label class="auto-next-option"><input id="auto-next" type="checkbox" disabled>Auto-next on correct</label>
-
             <div class="review-bar" id="review-bar" hidden>
               <span id="review-status" role="status"></span>
               <div class="review-buttons">
@@ -61,6 +59,7 @@
             <div id="choices" class="choices" role="group" aria-label="Answer choices" aria-describedby="kana" hidden></div>
 
             <p id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+            <label class="auto-next-option"><input id="auto-next" type="checkbox" disabled>Auto-next on correct</label>
             <div class="practice-actions">
               <button class="text-button" id="reveal" type="button" disabled>Reveal answer</button>
               <button class="button next" id="next" type="button" disabled>Next kana <span aria-hidden="true">→</span></button>
