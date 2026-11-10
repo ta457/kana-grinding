@@ -234,7 +234,7 @@ h1 {
   justify-content: space-between;
   gap: 0 12px;
   margin-top: 12px;
-  padding: 0 12px;
+  padding: 8px 12px;
   border-radius: 10px;
   background: var(--tint);
   color: var(--green);
@@ -714,6 +714,11 @@ footer {
 
   .practice {
     padding: 18px 20px 16px;
+  }
+
+  .feedback:empty {
+    min-height: 0;
+    margin: 0;
   }
 
   .question {
