@@ -152,6 +152,7 @@ function updateReviewControls() {
 
 function renderQuestion(focusAnswer = false) {
   solved = false;
+  $('practice').dataset.result = '';
   answer.value = '';
   form.noValidate = false;
   answer.removeAttribute('aria-invalid');
@@ -223,6 +224,7 @@ function updateSelection() {
 }
 
 function finish(revealed) {
+  $('practice').dataset.result = revealed ? '' : 'correct';
   setCombo(nextCombo(combo, !revealed, !questionMissed && !comboAwarded));
   comboAwarded = true;
   if (revealed) {
@@ -255,6 +257,7 @@ function submitAnswer(value, button) {
   if (isCorrect(current, value)) {
     finish(false);
   } else {
+    $('practice').dataset.result = 'wrong';
     setCombo(0);
     missed.add(current.kana);
     questionMissed = true;
